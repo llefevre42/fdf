@@ -1,0 +1,38 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parthing_fdf.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: llefevre <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/05/21 15:37:41 by llefevre          #+#    #+#             */
+/*   Updated: 2017/05/21 16:13:53 by llefevre         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+#include "fdf.h"
+
+int		put_cub(int x, int y, void *param);
+
+int		tri(char *str, void *param)
+{
+	int		i;
+	int		space;
+	int		colone;
+	t_tri	lst;
+
+	lst = *((t_tri *)param);
+	space = 0;
+	colone = 0;
+	lst.lon = 1;
+	lst.color = 0X00FF00;
+	i = 0;
+	while(str[i] != '\0')
+	{
+		printf("fff\n");
+		while(str[i] == ' ' || str[i] == '\n')
+			i++;
+		put_cub(space , colone, &lst);
+		i++;
+	}
+	return (0);
+}
