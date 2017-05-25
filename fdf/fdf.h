@@ -6,7 +6,7 @@
 /*   By: llefevre <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/21 15:34:06 by llefevre          #+#    #+#             */
-/*   Updated: 2017/05/23 15:10:32 by llefevre         ###   ########.fr       */
+/*   Updated: 2017/05/25 22:40:33 by llefevre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,11 @@ struct	s_tri
 	int				zoom;
 	int				nbr_zoom;
 	int				haut;
-	int				droite;;
+	int				droite;
+	int				xp;
+	int				yp;
+	int				xs;
+	int				ys;
 };
 typedef struct s_tri	t_tri;
 

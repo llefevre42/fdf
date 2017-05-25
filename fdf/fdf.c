@@ -6,7 +6,7 @@
 /*   By: llefevre <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/20 20:03:11 by llefevre          #+#    #+#             */
-/*   Updated: 2017/05/23 15:27:51 by llefevre         ###   ########.fr       */
+/*   Updated: 2017/05/25 22:37:39 by llefevre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <stdlib.h>
@@ -19,20 +19,9 @@ int		tri(char *str, t_tri *lst);
 
 void	affiche_cub(int keycode, t_tri *lst)
 {	
-	int x;
-	int y;
-	y = 0;
 	lst->color = 0X000000;
-	while (y < 1000)
-	{
-		x = 0;
-		while(x < 1000)
-		{
-			mlx_pixel_put(lst->mlx, lst->win, x, y, lst->color);
-			x++;
-		}
-		y++;
-	}
+	centrage(lst->input, lst);
+	tri(lst->input, lst);
 	if(keycode == 126)
 		lst->haut -= 10;
 	if(keycode == 125)
@@ -51,6 +40,14 @@ void	affiche_cub(int keycode, t_tri *lst)
 		lst->zoom = lst->zoom - 5;
 		lst->nbr_zoom--;
 	}
+	if(keycode == 89)
+		lst->color = 0XFF0000;
+	else if(keycode == 91)
+		lst->color = 0X00FF00;
+	else if(keycode == 92)
+		lst->color = 0X0000FF;
+	else
+		lst->color = 0XFFFFFF;
 	centrage(lst->input, lst);
 	tri(lst->input, lst);
 }
@@ -112,6 +109,12 @@ int		my_key_funct(int keycode, void *param)
 	if(keycode == 87)
 		affiche_cub(keycode, lst);
 	if(keycode == 84)
+		affiche_cub(keycode, lst);
+	if(keycode == 89)
+		affiche_cub(keycode, lst);
+	if(keycode == 91)
+		affiche_cub(keycode, lst);
+	if(keycode == 92)
 		affiche_cub(keycode, lst);
 	if(keycode == 25)
 	{
