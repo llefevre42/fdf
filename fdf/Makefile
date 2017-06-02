@@ -6,7 +6,7 @@
 #    By: thvocans <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/03/23 19:03:58 by thvocans          #+#    #+#              #
-#    Updated: 2017/05/21 17:17:56 by llefevre         ###   ########.fr        #
+#    Updated: 2017/06/01 17:23:16 by llefevre         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ H_FOLDER = ./
 
 LIB_FOLD = ./libft/
 
-LIB = libft.a
+LIB = libft/libft.a
 
 SRC = fdf parthing_fdf
 
@@ -37,7 +37,7 @@ $(NAME): $(LIB) $(O_FILE)
 	@echo "\033[32mexecutable OK\033[0m"
 
 ./%.o: ./%.c
-	@gcc -c $(FLAGS) $< -I$(LIB_FOLD) -o $@
+	@gcc -c  $< -I$(LIB_FOLD) -o $@
 	@echo "\033[32m$@\033[0m"
 
 $(LIB):

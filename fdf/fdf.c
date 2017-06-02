@@ -6,7 +6,7 @@
 /*   By: llefevre <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/20 20:03:11 by llefevre          #+#    #+#             */
-/*   Updated: 2017/05/25 22:37:39 by llefevre         ###   ########.fr       */
+/*   Updated: 2017/06/02 20:56:30 by llefevre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <stdlib.h>
@@ -15,13 +15,65 @@
 
 int		centrage(char *str, t_tri *lst);
 
-int		tri(char *str, t_tri *lst);
+int		tri(char *str, t_tri *lst, int ***tab);
+
+void	full_tab(t_tri *lst, int ***tab);
+
+void		ft_strlen_custom(char *str, t_tri *lst)
+{
+	int i;
+	int j;
+	int k;
+	int w;
+
+	k = 0;
+	i = 0;
+	j = 0;
+	w = 0;
+	while(str[i] != '\0')
+	{
+		while(str[i] != '\n' && str[i] != '\0')
+		{
+			if(str[i] >= '0' && str[i] <= '9')
+			{
+				j++;
+				while((str[i] >= '0' && str[i] <= '9') || str[i] == ',' || str[i] == 'X')
+					i++;
+			}
+			else
+				i++;
+		}
+		w++;
+		if(j > k)
+			k = j;
+		j = 0;
+		if(str[i] == '\n')
+			i++;
+	}
+	lst->largtab = k;
+	lst->hauttab = w;
+}
 
 void	affiche_cub(int keycode, t_tri *lst)
-{	
+{
+//	t_tab 	*tab;
+	int		**tab;
+	int i;
+
+	i = 0;
+	ft_strlen_custom(lst->input,lst);
+	printf("%d %d\n", lst->hauttab, lst->largtab);
+	tab = malloc(sizeof(int *) * (lst->hauttab * lst->largtab));
+	while(i < (lst->hauttab * lst->largtab))
+	{
+		tab[i] = malloc(sizeof(int) * 3);
+		i++;
+	}
+//	tab = (t_tab*)malloc((sizeof(t_tab) + 1) * (size_t)(lst->hauttab * lst->largtab));	
+	full_tab(lst , &tab);
 	lst->color = 0X000000;
 	centrage(lst->input, lst);
-	tri(lst->input, lst);
+	tri(lst->input, lst, &tab);
 	if(keycode == 126)
 		lst->haut -= 10;
 	if(keycode == 125)
@@ -30,6 +82,10 @@ void	affiche_cub(int keycode, t_tri *lst)
 		lst->droite += 10;
 	if(keycode == 123)
 		lst->droite -= 10;
+	if(keycode == 86)
+		lst->z += 3;
+	if(keycode == 83)
+		lst->z -= 3;
 	if(keycode == 87)
 	{
 		lst->zoom = lst->zoom + 5;
@@ -49,7 +105,7 @@ void	affiche_cub(int keycode, t_tri *lst)
 	else
 		lst->color = 0XFFFFFF;
 	centrage(lst->input, lst);
-	tri(lst->input, lst);
+	tri(lst->input, lst, &tab);
 }
 
 char	*ft_read(char *av)
@@ -106,6 +162,10 @@ int		my_key_funct(int keycode, void *param)
 		affiche_cub(keycode, lst);
 	if(keycode == 124)
 		affiche_cub(keycode, lst);
+	if(keycode == 86)
+		affiche_cub(keycode, lst);
+	if(keycode == 83)
+		affiche_cub(keycode, lst);
 	if(keycode == 87)
 		affiche_cub(keycode, lst);
 	if(keycode == 84)
@@ -116,21 +176,6 @@ int		my_key_funct(int keycode, void *param)
 		affiche_cub(keycode, lst);
 	if(keycode == 92)
 		affiche_cub(keycode, lst);
-	if(keycode == 25)
-	{
-		lst->color = 0XFF0000;
-		put_cub(x, y, lst);
-	}
-	if(keycode == 18)
-	{
-		lst->color = 0X00FF00;
-		put_cub(x, y, lst);
-	}
-	if(keycode == 35)
-	{
-		lst->color = 0X0000FF;
-		put_cub(x, y, lst);
-	}
 	if(keycode == 53)
 		exit(0);
 	return (0);
@@ -173,22 +218,23 @@ void	ft_error(int i)
 int		main(int ac, char **av)
 {
 	t_tri	lst;
-	int		y;
-	int		x;
-	char	*input;
 
+	lst.reste = 0;
+	lst.z = 3;
 	lst.zoom = 10;
+	lst.nbr_zoom = 0;
 	if (ac == 2)
 	{
 		lst.input = ft_read(av[1]);
+		printf("VU\n");
 		if (!lst.input)
 			ft_error(0);
 	}
 	else
 		printf("LA MAP ENCULER\n");
 	lst.mlx = mlx_init();
-	lst.win = mlx_new_window(lst.mlx, 1000, 1000, "yanma_mlx_42");
-	lst.droite = 500;
+	lst.win = mlx_new_window(lst.mlx, 1000, 1000, "Fdf");	
+	lst.droite = 500;	
 	lst.haut = 500;
 	affiche_cub(0, &lst);
 	mlx_key_hook(lst.win, my_key_funct, &lst);
