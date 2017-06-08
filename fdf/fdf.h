@@ -6,7 +6,7 @@
 /*   By: llefevre <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/21 15:34:06 by llefevre          #+#    #+#             */
-/*   Updated: 2017/06/02 20:10:38 by llefevre         ###   ########.fr       */
+/*   Updated: 2017/06/07 21:58:07 by llefevre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 # include <stdlib.h>
 # include <fcntl.h>
 # include <stdio.h> 		//delete
+# include "mlx.h"
+# include <math.h>
 # define BUFSIZE 200048
 
 struct	s_tab
@@ -32,6 +34,7 @@ struct				s_tri
 	void			*win;
 	char			*input;
 	long int		color;
+	long int		swap_color;
 	int				lon;
 	int				centrex;
 	int				centrey;
@@ -52,5 +55,22 @@ struct				s_tri
 	int				z;
 };
 typedef struct		 s_tri	t_tri;
+
+double	ft_pow(double x,double y);
+void	ft_convert(char *hex, int i, long *sum);
+long	ft_htoi(char *hex);
+int		put_cub_bis(int x, int y, int xp, int yp, t_tri *lst);
+void	affiche_marge(t_tri *lst);
+int		tri(char *str, t_tri *lst, int ***tab);
+void	full_tab(t_tri *lst, int ***tab);
+void	ft_strlen_custom(char *str, t_tri *lst);
+void	affiche_cub(int keycode, t_tri *lst);
+char	*ft_read(char *av);
+int		put_cub(int x, int y, t_tri *lst);
+int		my_key_funct(int keycode, void *param);
+int		put_mousse(int	keycode, int x, int y, void *param);
+void	ft_error(int i);
+void	atoi_dimentionelle(char str, t_tri *lst);
+void	print_ligne(t_tri *lst);
 
 #endif
