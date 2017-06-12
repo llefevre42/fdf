@@ -6,7 +6,7 @@
 /*   By: llefevre <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/02 21:54:04 by llefevre          #+#    #+#             */
-/*   Updated: 2017/06/08 06:03:27 by llefevre         ###   ########.fr       */
+/*   Updated: 2017/06/10 23:21:18 by llefevre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,18 @@ void	affiche_cub(int keycode, t_tri *lst)
 	}
 	if(keycode == 89)
 		lst->color = 0XFF0000;
-	else if(keycode == 91)
+	if(keycode == 91)
 		lst->color = 0X00FF00;
-	else if(keycode == 92)
+	if(keycode == 92)
 		lst->color = 0X0000FF;
+	if(keycode == 35)
+		lst->rota += 5;
+	if(keycode == 41)
+		lst->rota -= 5;
+/*	if(keycode == 31)
+	if(keycode == 34)
+	if(keycode == 40)
+	if(keycode == 53)
+*/
 	tri(lst->input, lst, &tab);
 }

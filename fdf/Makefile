@@ -6,7 +6,7 @@
 #    By: llefevre <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/06/07 20:31:18 by llefevre          #+#    #+#              #
-#    Updated: 2017/06/07 20:56:41 by llefevre         ###   ########.fr        #
+#    Updated: 2017/06/10 16:46:07 by llefevre         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@
 
 NAME = fdf
 
-FLAGS = -lmlx -framework OpenGL -framework AppKit
+FLAGS = -lmlx -L ./minilibx_macos2 -framework OpenGL -framework AppKit
 
 C_FOLDER = ./
 

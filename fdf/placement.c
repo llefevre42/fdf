@@ -6,7 +6,7 @@
 /*   By: llefevre <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/02 21:59:28 by llefevre          #+#    #+#             */
-/*   Updated: 2017/06/08 06:22:13 by llefevre         ###   ########.fr       */
+/*   Updated: 2017/06/10 22:33:15 by llefevre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,18 @@ int		tri(char *str, t_tri *lst, int ***tab)
 	int		neg;
 	int		ptab;
 	int		rest_ligne;
-	int		y;
+	int		c;
 	int		w;
 	int		p;
+	int		x2;
+	int		y2;
+	int		x3;
+	int 	y3;
 	long int	color_swap;
 	long int	swap;
 	
 	p = 0;
-	y = 0;
+	c = 0;
 	w = 0;
 	ptab = 0;
 	rest_ligne = 0;
@@ -78,13 +82,13 @@ int		tri(char *str, t_tri *lst, int ***tab)
 			if(str[i] == ',')
 			{
 				i += 3;
-				y = i;
+				c = i;
 				while((str[i] >= '0' && str[i] <= '9') || (str[i] >= 'A' && str[i] <= 'F'))
 					i++;
-				while(y < i)
+				while(c < i)
 				{
-					coloris[w] = str[y];
-					y++;
+					coloris[w] = str[c];
+					c++;
 					w++;
 				}
 				coloris[w] = '\0';
@@ -94,6 +98,26 @@ int		tri(char *str, t_tri *lst, int ***tab)
 			if(color_swap != 0 && lst->color != 0)
 				lst->color = color_swap;
 			i--;
+/*			if(lst->egal != 0)
+			{
+				if(neg == 1)
+					colone += (lst->egal * lst->z);
+				else
+					colone -= (lst->egal * lst->z);
+			}
+*/			if(lst->rota != 0)
+			{
+				x3 = space;
+				y3 = colone;
+/*				space = lst->droite - (lst->centrex * lst->zoom);
+				colone = lst->haut - (lst->centrey * lst->zoom);
+*/				x2 = 1000 + (space * cos(lst->rota * 0.0174533) - colone * sin(lst->rota * 0.0174533));
+				y2 = 600 + (space * sin(lst->rota * 0.0174533) + colone * cos(lst->rota * 0.0174533));
+				space = x2;
+				colone = y2;
+
+				printf("%d %d\n", x2, y2);
+			}
 			if(lst->egal != 0)
 			{
 				if(neg == 1)
@@ -105,6 +129,8 @@ int		tri(char *str, t_tri *lst, int ***tab)
 			tab[0][ptab][2] = colone;
 			lst->xs = space;
 			lst->ys = colone;
+//			if(ptab >= lst->largtab + 1 && tab[0][ptab - lst->largtab - 1][0] != 0 && str[p - 1] != '\n')
+//				face_cache(tab[0][ptab - lst->largtab - 1][1] + 1, tab[0][ptab - lst->largtab - 1][2] + 1, space - tab[0][ptab - lst->largtab - 1][1] - 1, colone - tab[0][ptab - lst->largtab - 1][2] - 1, lst , 0);
 //			if((space < 1000 && space > 0) && (colone < 1000 && colone > 0))
 				put_cub(space , colone, lst);
 			if(ptab >= 1 && (tab[0][ptab - 1][0] != 0 && str[p - 1] != '\n'))
@@ -133,6 +159,11 @@ int		tri(char *str, t_tri *lst, int ***tab)
 					colone -= (lst->egal * lst->z);
 				else
 					colone += (lst->egal * lst->z);
+			}
+			if(lst->rota != 0)
+			{
+				space = x3;
+				colone = y3;
 			}
 			lst->xp = space;
 			lst->yp = colone;

@@ -6,7 +6,7 @@
 /*   By: llefevre <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/21 15:34:06 by llefevre          #+#    #+#             */
-/*   Updated: 2017/06/07 21:58:07 by llefevre         ###   ########.fr       */
+/*   Updated: 2017/06/10 16:48:00 by llefevre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,9 @@ struct				s_tri
 {
 	void			*mlx;
 	void			*win;
+	void			*win2;
+	void			*interface;
+	int			*interface_i;
 	char			*input;
 	long int		color;
 	long int		swap_color;
@@ -53,9 +56,11 @@ struct				s_tri
 	int				largtab;
 	int				reste;
 	int				z;
+	int				rota;
 };
 typedef struct		 s_tri	t_tri;
 
+int		face_cache(int x, int y, int xp, int yp, t_tri *lst, int color);
 double	ft_pow(double x,double y);
 void	ft_convert(char *hex, int i, long *sum);
 long	ft_htoi(char *hex);
