@@ -6,7 +6,7 @@
 /*   By: llefevre <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/02 21:54:04 by llefevre          #+#    #+#             */
-/*   Updated: 2017/06/10 23:21:18 by llefevre         ###   ########.fr       */
+/*   Updated: 2017/06/15 18:30:35 by llefevre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,14 @@
 
 void	affiche_cub(int keycode, t_tri *lst)
 {
-	int		**tab;
 	int i;
+	int swap;
 
 	i = 0;
-	ft_strlen_custom(lst->input,lst);
-	tab = malloc(sizeof(int *) * (lst->hauttab * lst->largtab));
-	while(i < (lst->hauttab * lst->largtab))
-	{
-		tab[i] = malloc(sizeof(int) * 3);
-		i++;
-	}
-	full_tab(lst , &tab);
-	mlx_clear_window(lst->mlx, lst->win);
-//	lst->swap_color = lst->color;
-//	lst->color = 0X000000;
-//	tri(lst->input, lst, &tab);
-//	lst->color = lst->swap_color;
+	swap = lst->color;
+	lst->color = 0X000000;
+	tri(lst->input, lst);
+	lst->color = swap;
 	if(keycode == 126)
 		lst->haut -= 10;
 	if(keycode == 125)
@@ -63,10 +54,5 @@ void	affiche_cub(int keycode, t_tri *lst)
 		lst->rota += 5;
 	if(keycode == 41)
 		lst->rota -= 5;
-/*	if(keycode == 31)
-	if(keycode == 34)
-	if(keycode == 40)
-	if(keycode == 53)
-*/
-	tri(lst->input, lst, &tab);
+	tri(lst->input, lst);
 }

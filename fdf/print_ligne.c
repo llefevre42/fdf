@@ -6,7 +6,7 @@
 /*   By: llefevre <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/02 21:57:19 by llefevre          #+#    #+#             */
-/*   Updated: 2017/06/09 18:07:45 by llefevre         ###   ########.fr       */
+/*   Updated: 2017/06/14 23:30:45 by llefevre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	print_ligne(t_tri *lst)
 				somme -= dx;
 				y += cy;
 			}
-//			if((x < 1000 && x > 0) && (y < 1000 && y > 0))
+			if((x < 2000 && x > 0) && (y < 1200 && y > 0))
 				put_cub(x, y, lst);
 			i++;
 		}
@@ -62,7 +62,7 @@ void	print_ligne(t_tri *lst)
 				somme -= dy;
 				x += cx;
 			}
-//			if((x < 1000 && x > 0) && (y < 1000 && y > 0))
+			if((x < 2000 && x > 0) && (y < 1200 && y > 0))
 				put_cub(x, y, lst);
 			i++;
 		}

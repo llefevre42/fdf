@@ -6,7 +6,7 @@
 /*   By: llefevre <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/02 21:50:43 by llefevre          #+#    #+#             */
-/*   Updated: 2017/06/09 18:38:15 by llefevre         ###   ########.fr       */
+/*   Updated: 2017/06/15 16:01:35 by llefevre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,12 @@
 int		put_mousse(int	keycode, int x, int y, void *param)
 {
 	t_tri *lst;
+	int swap;
 	lst = ((t_tri *)param);
-//	lst->color = 0X00FF00;
+	swap = lst->color;
+	lst->color = 0X000000;
+	tri(lst->input, lst);
+	lst->color = swap;
 	printf("mousse %d (%d:%d)\n",keycode ,x ,y);
 	lst->lon = 10;
 	if((x >= 225 && x <= 475) && (y >= 505 && y <= 605))
@@ -82,20 +86,20 @@ int		put_mousse(int	keycode, int x, int y, void *param)
 		lst->droite += 10;
 		affiche_cub(0, lst);
 	}
-/*	if(keycode == 1)
-	{
+	/*	if(keycode == 1)
+		{
 		lst->color = 0XFF0000;
 		put_cub(x, y, lst);
-	}
-	if(keycode == 2)
-	{
+		}
+		if(keycode == 2)
+		{
 		lst->color = 0X00FF00;
 		put_cub(x, y, lst);
-	}
-	if(keycode == 3)
-	{
+		}
+		if(keycode == 3)
+		{
 		lst->color = 0X0000FF;
 		put_cub(x, y, lst);
-	}
-*/	return (0);
+		}
+		*/	return (0);
 }

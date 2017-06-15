@@ -18,7 +18,7 @@ void	crea_tab(t_tri *lst)
 
 	i = 0;
 	ft_strlen_custom1(lst->input,lst);
-	if(!(lst->tab = malloc(sizeof(long int *) * (lst->hauttab * lst->largtab))))
+	if(!(lst->tab = malloc(sizeof(int *) * (lst->hauttab * lst->largtab))))
 		ft_error(0);
 	while(i < (lst->hauttab * lst->largtab))
 	{

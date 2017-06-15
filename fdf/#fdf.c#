@@ -33,7 +33,7 @@ void	crea_tab(t_tri *lst)
 char	*ft_read(char *av)
 {
 	int		fd;
-	ssize_t	bsiz;
+	ssize_t		bsiz;
 	char	buf[BUFSIZE];
 	char	*out;
 

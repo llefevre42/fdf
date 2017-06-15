@@ -67,10 +67,7 @@ int		tri(char *str, t_tri *lst)
 				colone = y2;
 			}
 */
-			printf("1- %p\n" ,lst);
-			printf("2- %p\n" ,lst->tab);
-			printf("3- %p\n" ,lst->tab[ptab]);
-			printf("4- %ld\n" ,lst->tab[ptab][0]);
+			printf("%ld\n" ,lst->tab[ptab][4]);
 			if (lst)
 			{
 			  printf("a ");

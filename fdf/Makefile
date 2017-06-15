@@ -6,7 +6,7 @@
 #    By: llefevre <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/06/07 20:31:18 by llefevre          #+#    #+#              #
-#    Updated: 2017/06/10 16:46:07 by llefevre         ###   ########.fr        #
+#    Updated: 2017/06/13 17:43:59 by llefevre         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,7 @@ O_FILE = $(addsuffix .o,$(SRC))
 all: $(NAME)
 
 $(NAME): $(LIB) $(O_FILE)
-	@gcc -o $@ $^ $(FLAGS) -L$(LIB_FOLD) -I$(LIB_FOLD) -lft
+	@gcc -Wall -Werror -Wextra -o $@ $^ $(FLAGS) -L$(LIB_FOLD) -I$(LIB_FOLD) -lft
 	@echo "\033[32mexecutable OK\033[0m"
 	@echo "\033[32;40moooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo\n\
 	o-oooo---ooooooooooooooooooooooooooooooo--oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo----oooooooooo\n\

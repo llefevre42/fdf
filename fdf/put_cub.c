@@ -6,7 +6,7 @@
 /*   By: llefevre <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/02 21:52:08 by llefevre          #+#    #+#             */
-/*   Updated: 2017/06/10 23:47:17 by llefevre         ###   ########.fr       */
+/*   Updated: 2017/06/15 18:30:11 by llefevre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,13 @@ int		put_cub(int x, int y, t_tri *lst)
 
 	y1 = y;
 	x1 = x;
-	while (y < y1 + lst->lon)
+	while (y < y1 + 1)
 	{
 		x = x1;
-		while(x < x1 + lst->lon)
+		while(x < x1 + 1)
 		{
-			mlx_pixel_put(lst->mlx, lst->win, x, y, lst->color);
+//			mlx_pixel_put(lst->mlx, lst->win, x, y, lst->color);
+			lst->img[x + ((y - 1) * 2000)] = lst->color;
 			x++;
 		}
 		y++;
