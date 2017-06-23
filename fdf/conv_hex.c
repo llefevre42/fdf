@@ -6,9 +6,10 @@
 /*   By: llefevre <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/07 18:57:47 by llefevre          #+#    #+#             */
-/*   Updated: 2017/06/14 22:36:05 by llefevre         ###   ########.fr       */
+/*   Updated: 2017/06/23 07:23:50 by llefevre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "fdf.h"
 
 double		ft_pow(double x, double y)
@@ -36,7 +37,7 @@ void		ft_convert(char *hex, int i, long *sum)
 	}
 }
 
-long			ft_htoi(char *hex)
+long		ft_htoi(char *hex)
 {
 	int			i;
 	long		sum;

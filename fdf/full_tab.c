@@ -6,7 +6,7 @@
 /*   By: llefevre <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/02 21:56:11 by llefevre          #+#    #+#             */
-/*   Updated: 2017/06/15 19:37:06 by llefevre         ###   ########.fr       */
+/*   Updated: 2017/06/23 06:52:57 by llefevre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,8 @@ void	full_tab(t_tri *lst)
 
 	k = 0;
 	i = 0;
-	i = lst->hauttab * lst->largtab;
-	printf("%ld\n", i);
-	while(k < i)
+	i = lst->htab * lst->ltab;
+	while (k < i)
 	{
 		lst->tab[k][0] = 0;
 		lst->tab[k][1] = 0;

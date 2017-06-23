@@ -6,115 +6,78 @@
 /*   By: llefevre <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/02 21:54:56 by llefevre          #+#    #+#             */
-/*   Updated: 2017/06/15 18:22:45 by llefevre         ###   ########.fr       */
+/*   Updated: 2017/06/23 08:57:51 by llefevre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void		ft_strlen_custom1(char *str, t_tri *lst)
+void	atoi_dimentionelle(char str, t_tri *lst)
 {
-	long long int i;
-	long long int j;
-	long long int k;
-	long long int w;
-
-	k = 0;
-	i = 0;
-	j = 0;
-	w = 0;
-	while(str[i] != '\0')
-	{
-		while(str[i] != '\n' && str[i] != '\0')
-		{
-			if(str[i] >= '0' && str[i] <= '9')
-			{
-				j++;
-				while((str[i] >= '0' && str[i] <= '9') || str[i] == ',' || str[i] == 'X')
-					i++;
-			}
-			else
-				i++;
-		}
-		w++;
-		if(j > k)
-			k = j;
-		j = 0;
-		if(str[i] == '\n')
-			i++;
-	}
-	lst->largtab = k;
-	lst->hauttab = w;
-	lst->centrex = lst->largtab / 2;
-	lst->centrey = lst->hauttab / 2;
+	lst->egal *= 10;
+	lst->egal += (long int)str - '0';
 }
 
-void		ft_strlen_custom2(char *str, t_tri *lst)
+void	while_strlen(char *str, t_tri *lst, t_str *s)
 {
-	long int i;
-	long int jb;
-	int neg;
-	long int c;
-	long int w;
-	char *coloris;
-
-	lst->egal = 0;
-	w = 0;
-	c = 0;
-	neg = 1;
-	jb = 0;
-	i = 0;
-	if(!(coloris = malloc(sizeof(char) * (6 + 1))))
-		return;
-	while(str[i] != '\0')
+	while (str[s->i] != '\n' && str[s->i] != '\0')
 	{
-		while(str[i] != '\n' && str[i] != '\0')
+		if (str[s->i] >= '0' && str[s->i] <= '9')
 		{
-			if((str[i] >= 48 && str[i] <= 57) || str[i] == '-')
-			{
-				if(str[i] == '-')
-				{
-					neg = 1;
-					i++;
-				}
-				while(str[i] >= 48 && str[i] <= 57)
-				{
-					atoi_dimentionelle(str[i], lst);
-					i++;
-				}
-				lst->tab[jb][3] = lst->egal;
-				if(str[i] == ',')
-				{
-					i += 3;
-					c = i;
-					w = 0;
-					while((str[i] >= '0' && str[i] <= '9') || (str[i] >= 'A' && str[i] <= 'F'))
-						i++;
-					while(c < i)
-					{
-						coloris[w] = str[c];
-						c++;
-						w++;
-					}
-					coloris[w] = '\0';
-					lst->tab[jb][4] = ft_htoi(coloris) - 1;
-					ft_strclr(coloris);
-				}
-				if(lst->egal != 0)
-				{
-					if(neg == 1)
-					{
-						lst->tab[jb][3] *= -1;
-					}
-				}
-				neg = 0;
-				lst->egal = 0;
-				jb++;
-			}
-			else
-				i++;
+			s->j++;
+			while ((str[s->i] >= '0' && str[s->i] <= '9') \
+					|| (str[s->i] >= 'A' && str[s->i] <= 'F') \
+					|| str[s->i] == ',' || str[s->i] == 'X')
+				s->i++;
 		}
-		if(str[i] == '\n')
-			i++;
+		else
+			s->i++;
 	}
+	s->w++;
+	if (s->j > s->k)
+		s->k = s->j;
+	s->j = 0;
+	if (str[s->i] == '\n')
+		s->i++;
+}
+
+void	ft_strlen_custom1(char *str, t_tri *lst)
+{
+	t_str s;
+
+	s.k = 0;
+	s.i = 0;
+	s.j = 0;
+	s.w = 0;
+	while (str[s.i] != '\0')
+		while_strlen(str, lst, &s);
+	lst->ltab = s.k;
+	lst->htab = s.w;
+	lst->centrex = lst->ltab / 2;
+	lst->centrey = lst->htab / 2;
+}
+
+void	ft_strlen_custom2(char *str, t_tri *lst)
+{
+	t_strc s;
+
+	s.res = 0;
+	lst->egal = 0;
+	lst->nbr_p = 0;
+	s.w = 0;
+	s.c = 0;
+	s.neg = 0;
+	s.jb = 0;
+	s.i = 0;
+	if (!(s.coloris = malloc(sizeof(char) * (6 + 1))))
+		return ;
+	while (str[s.i] != '\0')
+	{
+		while (str[s.i] != '\n' && str[s.i] != '\0')
+			number(str, lst, &s);
+		if (str[s.i] == '\n')
+			s.i++;
+	}
+	free(s.coloris);
+	s.coloris = NULL;
 }
