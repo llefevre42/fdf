@@ -1,29 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_puttab.c                                        :+:      :+:    :+:   */
+/*   ft_swap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thvocans <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: llefevre <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/04/23 17:11:16 by thvocans          #+#    #+#             */
-/*   Updated: 2017/05/03 22:00:33 by thvocans         ###   ########.fr       */
+/*   Created: 2017/03/08 19:50:45 by llefevre          #+#    #+#             */
+/*   Updated: 2017/04/29 22:24:26 by llefevre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_puttab(char **tab)
+void	ft_swap(int *a, int *b)
 {
-	size_t i;
-	size_t j;
+	int swap;
 
-	i = 0;
-	j = 0;
-	if (!tab)
-		ft_putstr("(null)\n");
-	while (tab[i])
-	{
-		ft_putstr(tab[i++]);
-		ft_putchar('\n');
-	}
+	swap = *a;
+	*a = *b;
+	*b = swap;
 }

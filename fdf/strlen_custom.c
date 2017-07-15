@@ -6,7 +6,7 @@
 /*   By: llefevre <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/02 21:54:56 by llefevre          #+#    #+#             */
-/*   Updated: 2017/06/23 08:57:51 by llefevre         ###   ########.fr       */
+/*   Updated: 2017/07/13 23:42:54 by llefevre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,10 @@
 
 void	atoi_dimentionelle(char str, t_tri *lst)
 {
+	if (lst->egal * 10 > 2147483647)
+		ft_error(0);
+	if (lst->egal * 10 < -2147483648)
+		ft_error(0);
 	lst->egal *= 10;
 	lst->egal += (long int)str - '0';
 }
@@ -34,8 +38,9 @@ void	while_strlen(char *str, t_tri *lst, t_str *s)
 			s->i++;
 	}
 	s->w++;
-	if (s->j > s->k)
-		s->k = s->j;
+	if (s->j != s->k && s->w > 1)
+		ft_error(0);
+	s->k = s->j;
 	s->j = 0;
 	if (str[s->i] == '\n')
 		s->i++;

@@ -6,7 +6,7 @@
 /*   By: llefevre <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/02 21:54:04 by llefevre          #+#    #+#             */
-/*   Updated: 2017/06/23 08:53:15 by llefevre         ###   ########.fr       */
+/*   Updated: 2017/07/13 23:44:32 by llefevre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	last_affiche(int keycode, t_tri *lst)
 		lst->color = 0XFFFFFF;
 		lst->z = 1;
 		lst->zoom = 41;
-		lst->nbr_zoom = 1;
+		auto_size(lst);
 		lst->droite = 1000;
 		lst->haut = 600;
 	}

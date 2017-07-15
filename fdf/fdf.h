@@ -6,7 +6,7 @@
 /*   By: llefevre <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/21 15:34:06 by llefevre          #+#    #+#             */
-/*   Updated: 2017/06/23 07:19:58 by llefevre         ###   ########.fr       */
+/*   Updated: 2017/07/13 18:20:28 by llefevre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,10 @@
 # include "mlx.h"
 # include <math.h>
 # define BUFSIZE 200048
+# define MIN 1 
+# define NEG -5
+# define MID 5
+# define MAX 10
 
 
 struct				s_li
@@ -89,6 +93,7 @@ struct				s_tri
 	long int	centrey;
 	long int	zoom;
 	long int	nbr_zoom;
+	long int	nbr_p;
 	long int	haut;
 	long int	droite;
 	long int	xp;
@@ -107,12 +112,13 @@ struct				s_tri
 	long int	rotax;
 	long int	s_rota;
 	long int	**tab;
-	long int	nbr_p;
 	long int	t1;
 	long int	t2;
 };
 typedef struct		 s_tri	t_tri;
 
+int		put_mousse_echap(int key, int x, int y, t_tri *lst);
+void	auto_size(t_tri *lst);
 void	next_marge(t_tri *lst);
 void	last_marge(t_tri *lst);
 void	suite_marge(t_tri *lst);

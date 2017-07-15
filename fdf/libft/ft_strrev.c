@@ -1,25 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_list_last.c                                     :+:      :+:    :+:   */
+/*   ft_strrev.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thvocans <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: llefevre <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/28 15:45:53 by thvocans          #+#    #+#             */
-/*   Updated: 2017/04/25 14:31:54 by thvocans         ###   ########.fr       */
+/*   Created: 2017/03/08 21:07:33 by llefevre          #+#    #+#             */
+/*   Updated: 2017/04/29 22:24:06 by llefevre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_list	*ft_list_last(t_list *begin_list)
+char	*ft_strrev(char *str)
 {
-	t_list	*out;
+	int		i;
+	int		l;
+	char	str2;
 
-	out = begin_list;
-	while (out->next)
+	l = 0;
+	i = 0;
+	while (str[l] != '\0')
+		l++;
+	l--;
+	while (i < l)
 	{
-		out = out->next;
+		str2 = str[i];
+		str[i] = str[l];
+		str[l] = str2;
+		i++;
+		l--;
 	}
-	return (out);
+	return (str);
 }

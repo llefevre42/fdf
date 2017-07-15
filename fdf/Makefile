@@ -6,7 +6,7 @@
 #    By: llefevre <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/06/07 20:31:18 by llefevre          #+#    #+#              #
-#    Updated: 2017/06/21 19:34:38 by llefevre         ###   ########.fr        #
+#    Updated: 2017/07/11 16:25:50 by llefevre         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ LIB_FOLD = ./libft/
 
 LIB = libft/libft.a
 
-SRC = affiche_cub affiche_marge conv_hex fdf full_tab placement print_ligne put_cub put_keycode put_mousse strlen_custom rotation tracer_ligne norme_strlen
+SRC = affiche_cub affiche_marge conv_hex fdf full_tab placement print_ligne put_cub put_keycode put_mousse strlen_custom rotation tracer_ligne norme_strlen auto_size
 
 C_FILE = $(addsuffix .c,$(addprefix $(C_FOLDER),$(SRC)))
 
@@ -33,7 +33,7 @@ O_FILE = $(addsuffix .o,$(SRC))
 all: $(NAME)
 
 $(NAME): $(LIB) $(O_FILE)
-	@gcc -Wall -Werror -Wextra -o $@ $^ $(FLAGS) -L$(LIB_FOLD) -I$(LIB_FOLD) -lft
+	@gcc -Wall -Werror -Wextra -O3 -o $@ $^ $(FLAGS) -L$(LIB_FOLD) -I$(LIB_FOLD) -lft
 	@echo "\033[32mexecutable OK\033[0m"
 	@echo "\033[32;40moooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo\n\
 	o-oooo---ooooooooooooooooooooooooooooooo--oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo----oooooooooo\n\

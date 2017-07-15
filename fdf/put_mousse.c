@@ -6,7 +6,7 @@
 /*   By: llefevre <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/02 21:50:43 by llefevre          #+#    #+#             */
-/*   Updated: 2017/06/23 08:57:34 by llefevre         ###   ########.fr       */
+/*   Updated: 2017/07/13 19:00:45 by llefevre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,4 +67,11 @@ void	put_mousse_next(int key, int x, int y, t_tri *lst)
 	if ((x >= 445 && x <= 465) && (y >= 20 && y <= 40))
 		key = 65;
 	affiche_cub(key, lst);
+}
+
+int		put_mousse_echap(int key, int x, int y, t_tri *lst)
+{
+	if ((x >= 0 && x <= 30) && (y >= -30 && y <= 0))
+		exit(1);
+	return (0);
 }

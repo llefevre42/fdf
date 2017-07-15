@@ -1,30 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcmp.c                                        :+:      :+:    :+:   */
+/*   ft_rot42.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: llefevre <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/04/27 22:21:15 by llefevre          #+#    #+#             */
-/*   Updated: 2017/04/27 22:36:16 by llefevre         ###   ########.fr       */
+/*   Created: 2017/03/16 21:48:23 by llefevre          #+#    #+#             */
+/*   Updated: 2017/04/29 22:23:10 by llefevre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_memcmp(const void *s1, const void *s2, size_t n)
+char	*ft_rot42(char *str)
 {
-	unsigned char	*str1;
-	unsigned char	*str2;
+	int i;
+	int z;
 
-	str1 = (unsigned char*)s1;
-	str2 = (unsigned char*)s2;
-	while (n--)
+	i = 0;
+	while (str[i] != '\0')
 	{
-		if (*str1 != *str2)
-			return (*str1 - *str2);
-		str1++;
-		str2++;
+		if (str[i] >= 'A' && str[i] <= 'Z')
+		{
+			z = str[i];
+			z = z + 16;
+			if (z > 90)
+				z = z - 26;
+			str[i] = z;
+		}
+		else if (str[i] >= 'a' && str[i] <= 'z')
+		{
+			z = str[i];
+			z = z + 16;
+			if (z > 122)
+				z = z - 26;
+			str[i] = z;
+		}
+		i++;
 	}
-	return (0);
+	return (str);
 }

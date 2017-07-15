@@ -3,39 +3,48 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thvocans <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: llefevre <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/04/14 16:58:36 by thvocans          #+#    #+#             */
-/*   Updated: 2017/04/23 16:14:47 by thvocans         ###   ########.fr       */
+/*   Created: 2017/04/12 15:43:59 by llefevre          #+#    #+#             */
+/*   Updated: 2017/05/03 22:03:27 by llefevre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strnstr(const char *s1, const char *s2, size_t size)
+static size_t	ft_strlen_tn(const char *str)
 {
-	unsigned int	i;
-	unsigned int	j;
-	unsigned int	k;
-	size_t			l;
+	size_t	i;
 
 	i = 0;
-	l = ft_strlen(s2);
-	if (l == 0)
-		return ((char *)s1);
-	while (s1[i] && size >= l)
-	{
-		j = 0;
-		k = i;
-		while (s1[k] == s2[j])
-		{
-			j++;
-			k++;
-			if (!s2[j])
-				return (&((char *)s1)[i]);
-		}
+	while (str[i] != '\0')
 		i++;
-		size--;
+	return (i);
+}
+
+char			*ft_strnstr(const char *str, const char *to_find, size_t len)
+{
+	size_t	i;
+	size_t	j;
+
+	j = 0;
+	i = 0;
+	if (!(ft_strlen_tn(to_find)))
+		return ((char *)str);
+	while (str[i] != '\0' && i < len)
+	{
+		if (str[i] == to_find[j])
+		{
+			while ((str[i + j] == to_find[j] && j < ft_strlen_tn(to_find)) &&
+					(i + j < len))
+			{
+				if (j == ft_strlen_tn(to_find) - 1)
+					return ((char *)str + i);
+				j++;
+			}
+		}
+		j = 0;
+		i++;
 	}
-	return (NULL);
+	return (0);
 }

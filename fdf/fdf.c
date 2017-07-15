@@ -6,7 +6,7 @@
 /*   By: llefevre <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/20 20:03:11 by llefevre          #+#    #+#             */
-/*   Updated: 2017/06/23 10:08:54 by llefevre         ###   ########.fr       */
+/*   Updated: 2017/07/13 23:42:56 by llefevre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	crea_tab(t_tri *lst)
 	}
 	full_tab(lst);
 	ft_strlen_custom2(lst->input, lst);
+	auto_size(lst);
 }
 
 char	*ft_read(char *av)
@@ -37,7 +38,7 @@ char	*ft_read(char *av)
 	char	buf[BUFSIZE];
 	char	*out;
 
-	if(strcmp(av, "Makefile") == 0)
+	if ((strcmp(av, "Makefile") == 0) || (strcmp(av, "random") == 0))
 		ft_error(0);
 	fd = open(av, O_RDONLY);
 	out = NULL;
@@ -59,6 +60,9 @@ void	ft_error(int i)
 
 void	norme_main(t_tri *lst, int *trash1, int *trash2, int *trash3)
 {
+	int i;
+
+	i = 0;
 	lst->mlx = mlx_init();
 	lst->win = mlx_new_window(lst->mlx, 2000, 1200, "Fdf");
 	lst->win2 = mlx_new_window(lst->mlx, 500, 1000, "fdf_bis");
@@ -73,7 +77,13 @@ void	norme_main(t_tri *lst, int *trash1, int *trash2, int *trash3)
 	mlx_hook(lst->win, 2, (1L << 0), my_key_funct, lst);
 	mlx_hook(lst->win2, 2, (1L << 0), my_key_funct, lst);
 	mlx_mouse_hook(lst->win2, put_mousse, lst);
+	mlx_mouse_hook(lst->win, put_mousse_echap, lst);
 	mlx_loop(lst->mlx);
+	while (i < lst->ltab * lst->htab)
+	{
+		ft_memdel((void **)&(lst->tab[i]));
+		i++;
+	}
 }
 
 int		main(int ac, char **av)
@@ -89,7 +99,6 @@ int		main(int ac, char **av)
 	lst.color = 0XFFFFFF;
 	lst.reste = 0;
 	lst.z = 1;
-	lst.zoom = 41;
 	lst.nbr_zoom = 1;
 	if (ac == 2)
 	{
@@ -98,7 +107,7 @@ int		main(int ac, char **av)
 			ft_error(0);
 	}
 	else
-		printf("LA MAP ENCULER\n");
+		ft_error(0);
 	norme_main(&lst, &trash1, &trash2, &trash3);
 	return (0);
 }

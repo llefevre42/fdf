@@ -6,7 +6,7 @@
 #    By: thvocans <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/03/23 19:03:58 by thvocans          #+#    #+#              #
-#    Updated: 2017/05/11 16:30:03 by thvocans         ###   ########.fr        #
+#    Updated: 2017/07/12 16:59:49 by llefevre         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@
 
 NAME = libft.a
 
-FLAGS = -Wall -Wextra -Werror -I $(H_FOLDER)
+FLAGS = -Wall -Wextra -Werror -O3 -I $(H_FOLDER)
 
 C_FOLDER = ./
 
@@ -33,7 +33,8 @@ SRC = ft_memset ft_memcpy ft_memccpy ft_memmove ft_memchr ft_memcmp ft_bzero\
 	  ft_strsub ft_strjoin ft_strtrim ft_strmap ft_strmapi ft_strsplit\
 	  ft_memalloc ft_memdel\
 	  ft_lstnew ft_lstdelone ft_lstdel ft_lstadd ft_lstiter ft_lstmap\
-	  ft_malloncat ft_isspace ft_list_last ft_sqrt ft_puttab
+	  ft_malloncat ft_foreach ft_iseven ft_rot42 ft_sqrt ft_swap ft_strrev\
+	  ft_strcapitalize
 
 C_FILE = $(addsuffix .c,$(addprefix $(C_FOLDER),$(SRC)))
 

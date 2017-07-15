@@ -1,60 +1,77 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_split_whitespaces.c                             :+:      :+:    :+:   */
+/*   ft_strsplit.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thvocans <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: llefevre <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/20 17:45:37 by thvocans          #+#    #+#             */
-/*   Updated: 2017/05/10 20:01:01 by thvocans         ###   ########.fr       */
+/*   Created: 2017/04/11 16:32:17 by llefevre          #+#    #+#             */
+/*   Updated: 2017/05/04 17:29:56 by llefevre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int		ft_malloc(char const *str, t_split *var)
+static int		reduc(const char *s, char c)
 {
 	int i;
-	int len;
+	int d;
 
 	i = 0;
-	len = 0;
-	var->i = 0;
-	var->j = 0;
-	var->k = 0;
-	while (str[len])
-		len++;
-	if (!(var->out = malloc(sizeof(var->out) * (len + 1))))
-		return (0);
-	while (i < len)
-		if (!((var->out[i++]) = malloc(sizeof(char) * len)))
-			return (0);
-	return (len);
+	d = 0;
+	while (s[i] != '\0')
+	{
+		if (s[i] != c && s[i] != '\n')
+		{
+			d++;
+			while (s[i] != c && s[i] != '\0')
+				i++;
+		}
+		else
+			i++;
+	}
+	return (d);
 }
 
-char			**ft_strsplit(char const *str, char c)
+static void		ft_reduc2(char ***j, int i, const char *s, char c)
 {
-	t_split	var;
+	int w;
+	int d;
+	int o;
 
-	if (str && c)
+	o = 0;
+	while (s[i] != '\0')
 	{
-		var.len = ft_malloc(str, &var);
-		if (var.len == 0 && !(var.out))
-			return (NULL);
-		while (str[var.i] == c)
-			var.i++;
-		while (str[var.i])
-		{
-			while (!(str[var.i] == c) && str[var.i])
-				var.out[var.k][var.j++] = str[var.i++];
-			while (str[var.i] == c)
-				var.i++;
-			var.out[var.k++][var.j] = '\0';
-			var.j = 0;
-		}
-		free(var.out[var.k]);
-		var.out[var.k] = NULL;
-		return (var.out);
+		while (s[i] == c)
+			i++;
+		w = i;
+		while (s[i] != c && s[i] != '\0')
+			i++;
+		j[0][o] = (char *)malloc((i - w + 1) * sizeof(char));
+		d = -1;
+		while (++d < i - w)
+			j[0][o][d] = s[w + d];
+		j[0][o][d] = '\0';
+		o++;
 	}
-	return (NULL);
+	if (s[i - 1] != c)
+		j[0][o] = 0;
+	else
+		j[0][o - 1] = 0;
+}
+
+char			**ft_strsplit(char const *s, char c)
+{
+	char	**j;
+	int		i;
+	int		o;
+
+	if (!(s))
+		return (0);
+	o = reduc(s, c);
+	if (!(j = (char **)malloc((o + 1) * sizeof(char*))))
+		return (NULL);
+	i = 0;
+	ft_reduc2(&j, i, s, c);
+	return (j);
 }

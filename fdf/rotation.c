@@ -6,7 +6,7 @@
 /*   By: llefevre <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/09 22:01:08 by llefevre          #+#    #+#             */
-/*   Updated: 2017/06/23 08:18:58 by llefevre         ###   ########.fr       */
+/*   Updated: 2017/07/12 15:27:23 by llefevre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	rotationy(t_pla *s, t_tri *lst)
 	swap2 = 600 + (s->space * sin(lst->rotay * 0.0174533) \
 			+ (lst->tab[s->p][3]) * cos(lst->rotay * 0.0174533));
 	s->space = swap;
-	lst->tab[s->p][3] = swap2; //- ((400 * lst->z) + 400);
+	lst->tab[s->p][3] = swap2;
 }
 
 void	rotationx(t_pla *s, t_tri *lst)
@@ -53,7 +53,7 @@ void	rotationx(t_pla *s, t_tri *lst)
 	swap2 = 1600 + lst->tab[s->p][3] * cos(lst->rotax * 0.0174533) \
 			+ s->colone * sin(lst->rotax * 0.0174533);
 	lst->tab[s->p][3] = swap;
-	s->colone = swap2; //- ((400 * lst->z));
+	s->colone = swap2;
 }
 
 void	rotation(t_pla *s, t_tri *lst)
