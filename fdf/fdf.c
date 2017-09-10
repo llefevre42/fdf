@@ -6,7 +6,7 @@
 /*   By: llefevre <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/20 20:03:11 by llefevre          #+#    #+#             */
-/*   Updated: 2017/07/13 23:42:56 by llefevre         ###   ########.fr       */
+/*   Updated: 2017/08/29 15:54:11 by llefevre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,18 @@ void	crea_tab(t_tri *lst)
 
 	i = 0;
 	ft_strlen_custom1(lst->input, lst);
-	if (!(lst->tab = malloc(sizeof(long int *) * (lst->htab * lst->ltab))))
+	if (!(lst->tab = malloc(sizeof(long double *) * (lst->htab * lst->ltab))))
 		ft_error(0);
 	while (i < (lst->htab * lst->ltab))
 	{
-		if (!(lst->tab[i] = malloc(sizeof(long int) * 5)))
+		if (!(lst->tab[i] = malloc(sizeof(long double) * 5)))
 			ft_error(0);
 		i++;
 	}
 	full_tab(lst);
 	ft_strlen_custom2(lst->input, lst);
 	auto_size(lst);
+	auto_size_z(lst);
 }
 
 char	*ft_read(char *av)
@@ -98,8 +99,8 @@ int		main(int ac, char **av)
 	lst.rotax = 0;
 	lst.color = 0XFFFFFF;
 	lst.reste = 0;
+	lst.bra = 0;
 	lst.z = 1;
-	lst.nbr_zoom = 1;
 	if (ac == 2)
 	{
 		lst.input = ft_read(av[1]);

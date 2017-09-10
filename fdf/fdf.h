@@ -6,7 +6,7 @@
 /*   By: llefevre <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/21 15:34:06 by llefevre          #+#    #+#             */
-/*   Updated: 2017/07/13 18:20:28 by llefevre         ###   ########.fr       */
+/*   Updated: 2017/09/05 21:33:28 by llefevre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <stdio.h> 		//delete
 # include "mlx.h"
 # include <math.h>
-# define BUFSIZE 200048
+# define BUFSIZE 2000048
 # define MIN 1 
 # define NEG -5
 # define MID 5
@@ -92,7 +92,6 @@ struct				s_tri
 	long int	centrex;
 	long int	centrey;
 	long int	zoom;
-	long int	nbr_zoom;
 	long int	nbr_p;
 	long int	haut;
 	long int	droite;
@@ -106,19 +105,23 @@ struct				s_tri
 	long int	htab;
 	long int	ltab;
 	long int	reste;
-	long int	z;
+	long double		z;
+	long double	max_z;
+	long int	bra;
 	long int	rotaz;
 	long int	rotay;
 	long int	rotax;
 	long int	s_rota;
-	long int	**tab;
+	long double	**tab;
 	long int	t1;
 	long int	t2;
 };
 typedef struct		 s_tri	t_tri;
 
+void	ligne_setup(t_pla *s, t_tri *l);
 int		put_mousse_echap(int key, int x, int y, t_tri *lst);
 void	auto_size(t_tri *lst);
+void	auto_size_z(t_tri *lst);
 void	next_marge(t_tri *lst);
 void	last_marge(t_tri *lst);
 void	suite_marge(t_tri *lst);

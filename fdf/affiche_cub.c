@@ -6,7 +6,7 @@
 /*   By: llefevre <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/02 21:54:04 by llefevre          #+#    #+#             */
-/*   Updated: 2017/07/13 23:44:32 by llefevre         ###   ########.fr       */
+/*   Updated: 2017/07/18 08:19:59 by llefevre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,15 +83,13 @@ void	suite_affiche(int keycode, t_tri *lst, long int i, long int end)
 	if (keycode == 83)
 		lst->z -= 1;
 	if (keycode == 87)
-	{
-		lst->zoom = lst->zoom + 5;
-		lst->nbr_zoom++;
-	}
+		lst->zoom = lst->zoom + 1;
 	if (keycode == 84)
-	{
-		lst->zoom = lst->zoom - 5;
-		lst->nbr_zoom--;
-	}
+		lst->zoom = lst->zoom - 1;
+	if (keycode == 67 && lst->bra == 0)
+		lst->bra = 1;
+	else if (keycode == 67 && lst->bra == 1)
+		lst->bra = 0;
 }
 
 void	affiche_cub(int keycode, t_tri *lst)

@@ -6,7 +6,7 @@
 /*   By: llefevre <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/02 21:59:28 by llefevre          #+#    #+#             */
-/*   Updated: 2017/07/11 15:37:40 by llefevre         ###   ########.fr       */
+/*   Updated: 2017/08/29 16:02:20 by llefevre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	couleur_et_ligne(t_pla *s, t_tri *l)
 {
-	s->colone -= (l->tab[s->p][3] * l->z);
+	s->colone -= ((long int)(l->tab[s->p][3]) * l->z);
 	l->tab[s->p][1] = s->space;
 	l->tab[s->p][2] = s->colone;
 	l->xs = s->space;
@@ -26,25 +26,19 @@ void	couleur_et_ligne(t_pla *s, t_tri *l)
 	if ((s->space > 0 && s->space < 2000) && (s->colone > 0 \
 			&& s->colone < 1200))
 		put_cub(s->space, s->colone, l);
-	if (s->p >= 1 && l->tab[s->p - 1][0] != 0  \
-			&& s->p - 1 != (l->ltab * s->rest_ligne) - 1)
-		ligne_p(s, l);
-	if (s->p >= l->ltab && l->tab[s->p - l->ltab][0] != 0)
-		ligne_h(s, l);
-	if (s->p >= l->ltab + 1 && l->tab[s->p - l->ltab - 1][0] != 0 \
-			&& s->p - l->ltab - 1 != (l->ltab * s->rest_ligne) - l->ltab - 1)
-		ligne_d(s, l);
+	if(l->bra == 0)
+		ligne_setup(s, l);
 	l->tab[s->p][0] = 1;
-	s->colone += (l->tab[s->p][3] * l->z);
 }
 
 void	post_reset(t_pla *s, t_tri *l)
 {
+	s->colone += ((long int)(l->tab[s->p][3]) * l->z);
 	if (l->s_rota != 0)
 	{
 		s->space = s->x3;
 		s->colone = s->y3;
-		l->tab[s->p][3] = s->z3;
+		l->tab[s->p][3] = (long int)s->z3;
 	}
 	s->p++;
 	l->xp = s->space;
@@ -59,7 +53,7 @@ void	couleur_rota(t_pla *s, t_tri *l)
 	{
 		s->x3 = s->space;
 		s->y3 = s->colone;
-		s->z3 = l->tab[s->p][3];
+		s->z3 = (long int)(l->tab[s->p][3]);
 		rotation(s, l);
 	}
 }

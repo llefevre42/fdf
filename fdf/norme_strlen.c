@@ -6,7 +6,7 @@
 /*   By: llefevre <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/21 19:16:02 by llefevre          #+#    #+#             */
-/*   Updated: 2017/07/13 19:01:43 by llefevre         ###   ########.fr       */
+/*   Updated: 2017/08/29 14:42:18 by llefevre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,17 @@ void	color(char *str, t_tri *l, t_strc *s)
 		s->c = s->i;
 		s->w = 0;
 		while ((str[s->i] >= '0' && str[s->i] <= '9') \
-				|| (str[s->i] >= 'A' && str[s->i] <= 'F'))
+				|| (str[s->i] >= 'A' && str[s->i] <= 'F')
+				|| (str[s->i] >= 'a' && str[s->i] <= 'f'))
 			s->i++;
+		if (s->i - s->c < 6)
+		{
+			while (s->w + (s->i - s->c) < 6)
+			{
+				s->coloris[s->w] = '0';
+				s->w++;
+			}
+		}
 		while (s->c < s->i)
 		{
 			s->coloris[s->w] = str[s->c];
@@ -29,7 +38,7 @@ void	color(char *str, t_tri *l, t_strc *s)
 			s->w++;
 		}
 		s->coloris[s->w] = '\0';
-		l->tab[s->jb][4] = ft_htoi(s->coloris) - 1;
+		l->tab[s->jb][4] = ft_htoi(s->coloris);
 		ft_strclr(s->coloris);
 	}
 }
@@ -49,7 +58,7 @@ void	number(char *str, t_tri *l, t_strc *s)
 			atoi_dimentionelle(str[s->i], l);
 			s->i++;
 		}
-		l->tab[s->jb][3] = l->egal;
+		l->tab[s->jb][3] = (long double)l->egal;
 		color(str, l, s);
 		if (s->neg == 1)
 			l->tab[s->jb][3] *= -1;

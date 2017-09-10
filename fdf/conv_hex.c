@@ -6,7 +6,7 @@
 /*   By: llefevre <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/07 18:57:47 by llefevre          #+#    #+#             */
-/*   Updated: 2017/07/13 19:47:09 by llefevre         ###   ########.fr       */
+/*   Updated: 2017/07/30 18:30:37 by llefevre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,9 @@ long		ft_htoi(char *hex)
 		return (16);
 	if (ft_strcmp(hex, "-10") == 0)
 		return (-16);
-	if (sum > 15)
+	if (sum == 16777215)
+		sum--;
+	else if (sum > 15)
 		sum++;
 	if (minus)
 		return (-sum);
