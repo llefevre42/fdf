@@ -1,38 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parthing_fdf.c                                     :+:      :+:    :+:   */
+/*   ft_swap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: llefevre <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/05/21 15:37:41 by llefevre          #+#    #+#             */
-/*   Updated: 2017/05/21 16:13:53 by llefevre         ###   ########.fr       */
+/*   Created: 2017/03/08 19:50:45 by llefevre          #+#    #+#             */
+/*   Updated: 2017/04/29 22:24:26 by llefevre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "fdf.h"
 
-int		put_cub(int x, int y, void *param);
+#include "libft.h"
 
-int		tri(char *str, void *param)
+void	ft_swap(int *a, int *b)
 {
-	int		i;
-	int		space;
-	int		colone;
-	t_tri	lst;
+	int swap;
 
-	lst = *((t_tri *)param);
-	space = 0;
-	colone = 0;
-	lst.lon = 1;
-	lst.color = 0X00FF00;
-	i = 0;
-	while(str[i] != '\0')
-	{
-		printf("fff\n");
-		while(str[i] == ' ' || str[i] == '\n')
-			i++;
-		put_cub(space , colone, &lst);
-		i++;
-	}
-	return (0);
+	swap = *a;
+	*a = *b;
+	*b = swap;
 }

@@ -3,46 +3,73 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thvocans <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: llefevre <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/04/13 17:28:15 by thvocans          #+#    #+#             */
-/*   Updated: 2017/04/13 19:28:52 by thvocans         ###   ########.fr       */
+/*   Created: 2017/04/28 10:41:48 by llefevre          #+#    #+#             */
+/*   Updated: 2017/05/03 20:11:04 by llefevre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static void	ft_init(t_itoa *var)
+static int		nbr_of_zero(int n)
 {
-	var->neg = (var->cpy < 0 ? -1 : 1);
-	var->i = (var->neg < 0 ? 1 : 0);
-	var->size = 1 + var->i;
-	var->cpy = (var->neg > 0 ? (var->cpy) : (var->cpy * -1));
-	var->tmp = var->cpy;
-	while (var->tmp > 9)
+	int i;
+
+	i = 0;
+	while (n > 9)
 	{
-		var->size += 1;
-		var->tmp /= 10;
+		n = n / 10;
+		i++;
 	}
-	var->tmp = var->cpy;
-	var->out = malloc(sizeof(char) * var->size + 1);
+	i++;
+	return (i);
 }
 
-char		*ft_itoa(int n)
+static void		empty_line(t_itoa *t, int n)
 {
-	t_itoa	var;
+	int k;
 
-	var.cpy = n;
-	ft_init(&var);
-	if (!var.out)
-		return (NULL);
-	if (var.neg < 0)
-		var.out[0] = '-';
-	var.out[var.size--] = '\0';
-	while (var.size >= var.i)
+	t->f[t->i] = '\0';
+	t->i--;
+	while (n > 9)
 	{
-		var.out[var.size--] = (var.cpy % 10) + '0';
-		var.cpy /= 10;
+		k = n % 10;
+		n = n / 10;
+		t->f[t->i] = k + '0';
+		t->i--;
 	}
-	return (var.out);
+	t->f[t->i] = n + '0';
+	if (t->neg == 1)
+		t->f[--(t->i)] = '-';
+	if (t->min == 1)
+	{
+		t->i = ft_strlen(t->f) - 1;
+		t->f[t->i] += 1;
+	}
+}
+
+char			*ft_itoa(int n)
+{
+	t_itoa	t;
+
+	t.neg = 0;
+	t.min = 0;
+	if (n < 0)
+	{
+		t.neg = 1;
+		if (n == -2147483648)
+		{
+			n += 1;
+			t.min = 1;
+		}
+		n *= -1;
+	}
+	t.i = nbr_of_zero(n);
+	if (t.neg == 1)
+		t.i++;
+	if (!(t.f = (char *)malloc((t.i + 1) * sizeof(char))))
+		return (NULL);
+	empty_line(&t, n);
+	return (t.f);
 }

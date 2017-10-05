@@ -6,173 +6,88 @@
 /*   By: llefevre <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/02 21:59:28 by llefevre          #+#    #+#             */
-/*   Updated: 2017/06/10 22:33:15 by llefevre         ###   ########.fr       */
+/*   Updated: 2017/08/29 16:02:20 by llefevre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	atoi_dimentionelle(char str, t_tri *lst)
+void	couleur_et_ligne(t_pla *s, t_tri *l)
 {
-	lst->egal *= 10;
-	lst->egal += (int)str - '0';
+	s->colone -= ((long int)(l->tab[s->p][3]) * l->z);
+	l->tab[s->p][1] = s->space;
+	l->tab[s->p][2] = s->colone;
+	l->xs = s->space;
+	l->ys = s->colone;
+	if (l->tab[s->p][4] != -1 && l->color != 0)
+		l->color = l->tab[s->p][4];
+	if (l->tab[s->p][4] == -1 && l->color != 0)
+		hauteur_couleur(s, l);
+	if ((s->space > 0 && s->space < 2000) && (s->colone > 0 \
+			&& s->colone < 1200))
+		put_cub(s->space, s->colone, l);
+	if(l->bra == 0)
+		ligne_setup(s, l);
+	l->tab[s->p][0] = 1;
 }
 
-int		tri(char *str, t_tri *lst, int ***tab)
+void	post_reset(t_pla *s, t_tri *l)
 {
-	char	*coloris;
-	int		i;
-	int		space;
-	int		colone;
-	int		neg;
-	int		ptab;
-	int		rest_ligne;
-	int		c;
-	int		w;
-	int		p;
-	int		x2;
-	int		y2;
-	int		x3;
-	int 	y3;
-	long int	color_swap;
-	long int	swap;
-	
-	p = 0;
-	c = 0;
-	w = 0;
-	ptab = 0;
-	rest_ligne = 0;
-	space = lst->droite - (lst->centrex * lst->zoom);
-	colone = lst->haut - (lst->centrey * lst->zoom);
-	lst->lon = 1;
-	i = 0;
-	lst->xp = space;
-	lst->yp = colone;
-	swap = lst->color;
-	if(!(coloris = malloc(sizeof(char) * (6 + 1))))
-		return (0);
-	while(str[i] != '\0')
+	s->colone += ((long int)(l->tab[s->p][3]) * l->z);
+	if (l->s_rota != 0)
 	{
-		color_swap = 0;
-		w = 0;
-		while(str[i] == ' ' || str[i] == '\n')
-		{
-			if(str[i] == '\n')
-			{
-				colone += lst->zoom;
-				space = lst->droite - (lst->centrex * lst->zoom);
-				rest_ligne++;
-				ptab = lst->largtab * rest_ligne;
-			}
-			i++;
-		}
-		p = i;
-		if((str[i] >= 48 && str[i] <= 57) || str[i] == 45)
-		{
-			if(str[i] == 45)
-			{
-				neg = 1;
-				i++;
-			}
-			while(str[i] >= 48 && str[i] <= 57)
-			{
-				atoi_dimentionelle(str[i], lst);
-				i++;
-			}
-			if(str[i] == ',')
-			{
-				i += 3;
-				c = i;
-				while((str[i] >= '0' && str[i] <= '9') || (str[i] >= 'A' && str[i] <= 'F'))
-					i++;
-				while(c < i)
-				{
-					coloris[w] = str[c];
-					c++;
-					w++;
-				}
-				coloris[w] = '\0';
-				color_swap = ft_htoi(coloris) - 1;
-				ft_strclr(coloris);
-			}
-			if(color_swap != 0 && lst->color != 0)
-				lst->color = color_swap;
-			i--;
-/*			if(lst->egal != 0)
-			{
-				if(neg == 1)
-					colone += (lst->egal * lst->z);
-				else
-					colone -= (lst->egal * lst->z);
-			}
-*/			if(lst->rota != 0)
-			{
-				x3 = space;
-				y3 = colone;
-/*				space = lst->droite - (lst->centrex * lst->zoom);
-				colone = lst->haut - (lst->centrey * lst->zoom);
-*/				x2 = 1000 + (space * cos(lst->rota * 0.0174533) - colone * sin(lst->rota * 0.0174533));
-				y2 = 600 + (space * sin(lst->rota * 0.0174533) + colone * cos(lst->rota * 0.0174533));
-				space = x2;
-				colone = y2;
-
-				printf("%d %d\n", x2, y2);
-			}
-			if(lst->egal != 0)
-			{
-				if(neg == 1)
-					colone += (lst->egal * lst->z);
-				else
-					colone -= (lst->egal * lst->z);
-			}
-			tab[0][ptab][1] = space;
-			tab[0][ptab][2] = colone;
-			lst->xs = space;
-			lst->ys = colone;
-//			if(ptab >= lst->largtab + 1 && tab[0][ptab - lst->largtab - 1][0] != 0 && str[p - 1] != '\n')
-//				face_cache(tab[0][ptab - lst->largtab - 1][1] + 1, tab[0][ptab - lst->largtab - 1][2] + 1, space - tab[0][ptab - lst->largtab - 1][1] - 1, colone - tab[0][ptab - lst->largtab - 1][2] - 1, lst , 0);
-//			if((space < 1000 && space > 0) && (colone < 1000 && colone > 0))
-				put_cub(space , colone, lst);
-			if(ptab >= 1 && (tab[0][ptab - 1][0] != 0 && str[p - 1] != '\n'))
-			{
-				lst->xp = tab[0][ptab - 1][1];
-				lst->yp = tab[0][ptab - 1][2];
-				print_ligne(lst);
-			}
-			if(ptab >= lst->largtab && tab[0][ptab - lst->largtab][0] != 0)
-			{
-				lst->xp = tab[0][ptab - lst->largtab][1];
-				lst->yp = tab[0][ptab - lst->largtab][2];
-				print_ligne(lst);
-			}
-			if(ptab >= lst->largtab + 1 && tab[0][ptab - lst->largtab - 1][0] != 0 && str[p - 1] != '\n')
-			{
-				lst->xp = tab[0][ptab - lst->largtab - 1][1];
-				lst->yp = tab[0][ptab - lst->largtab - 1][2];
-				print_ligne(lst);
-			}
-			tab[0][ptab][0] = 1;
-			ptab++;
-			if(lst->egal != 0)
-			{
-				if(neg == 1)
-					colone -= (lst->egal * lst->z);
-				else
-					colone += (lst->egal * lst->z);
-			}
-			if(lst->rota != 0)
-			{
-				space = x3;
-				colone = y3;
-			}
-			lst->xp = space;
-			lst->yp = colone;
-			space += lst->zoom;
-			neg = 0;
-			lst->egal = 0;
-			lst->color = swap;
-		}
-		i++;
+		s->space = s->x3;
+		s->colone = s->y3;
+		l->tab[s->p][3] = (long int)s->z3;
 	}
+	s->p++;
+	l->xp = s->space;
+	l->yp = s->colone;
+	s->space += l->zoom;
+	l->color = s->swap;
+}
+
+void	couleur_rota(t_pla *s, t_tri *l)
+{
+	if (l->s_rota != 0)
+	{
+		s->x3 = s->space;
+		s->y3 = s->colone;
+		s->z3 = (long int)(l->tab[s->p][3]);
+		rotation(s, l);
+	}
+}
+
+void	a_la_ligne(t_pla *s, t_tri *l)
+{
+	if (s->p == (l->ltab * s->rest_ligne) + l->ltab)
+	{
+		s->colone += l->zoom;
+		s->space = l->droite - (l->centrex * l->zoom);
+		s->rest_ligne++;
+		s->p = l->ltab * s->rest_ligne;
+	}
+}
+
+int		tri(t_tri *lst)
+{
+	t_pla s;
+
+	s.p = 0;
+	s.rest_ligne = 0;
+	s.space = lst->droite - (lst->centrex * lst->zoom);
+	s.colone = lst->haut - (lst->centrey * lst->zoom);
+	lst->lon = 1;
+	lst->xp = s.space;
+	lst->yp = s.colone;
+	s.swap = lst->color;
+	while (s.p < lst->nbr_p)
+	{
+		a_la_ligne(&s, lst);
+		couleur_rota(&s, lst);
+		couleur_et_ligne(&s, lst);
+		post_reset(&s, lst);
+	}
+	mlx_put_image_to_window(lst->mlx, lst->win, lst->pt_img, 0, 0);
 	return (0);
 }

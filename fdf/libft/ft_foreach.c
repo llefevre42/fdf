@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_list_last.c                                     :+:      :+:    :+:   */
+/*   ft_foreach.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thvocans <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: llefevre <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/28 15:45:53 by thvocans          #+#    #+#             */
-/*   Updated: 2017/04/25 14:31:54 by thvocans         ###   ########.fr       */
+/*   Created: 2017/03/27 16:42:38 by llefevre          #+#    #+#             */
+/*   Updated: 2017/04/29 22:22:45 by llefevre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_list	*ft_list_last(t_list *begin_list)
+void	ft_foreach(int *tab, int length, void (*f)(int))
 {
-	t_list	*out;
+	int i;
 
-	out = begin_list;
-	while (out->next)
+	i = 0;
+	while (i < length)
 	{
-		out = out->next;
+		f(tab[i]);
+		i++;
 	}
-	return (out);
 }

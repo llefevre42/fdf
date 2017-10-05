@@ -6,66 +6,71 @@
 /*   By: llefevre <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/02 21:57:19 by llefevre          #+#    #+#             */
-/*   Updated: 2017/06/09 18:07:45 by llefevre         ###   ########.fr       */
+/*   Updated: 2017/07/30 16:50:17 by llefevre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	print_ligne(t_tri *lst)
+long int	ft_abs(long int nbr)
 {
-	int i;
-	int x;
-	int y;
-	int	dx;
-	int dy;
-	int cx;
-	int cy;
-	int	somme;
+	if (nbr < 0)
+		nbr *= -1;
+	return (nbr);
+}
 
-	x = lst->xp;
-	y = lst->yp;
-	dx = lst->xs - lst->xp;
-	dy = lst->ys - lst->yp;
-	cx = (dx > 0 ) ? 1 : -1;
-	cy = (dy > 0 ) ? 1 : -1;
-	dx = abs(dx);
-	dy = abs(dy);
-	if (dx > dy)
+void		positif(t_li *l, t_tri *lst)
+{
+	l->somme = l->dx / 2;
+	l->i = 1;
+	while (l->i <= l->dx)
 	{
-		somme = dx / 2 ;
-		i = 1;
-		while (i <= dx)
+		l->x += l->cx;
+		l->somme += l->dy;
+		if (l->somme >= l->dx)
 		{
-			x += cx ;
-			somme += dy ;
-			if (somme >= dx)
-			{
-				somme -= dx;
-				y += cy;
-			}
-//			if((x < 1000 && x > 0) && (y < 1000 && y > 0))
-				put_cub(x, y, lst);
-			i++;
+			l->somme -= l->dx;
+			l->y += l->cy;
 		}
-	}
-	else
-	{
-		somme = dy / 2 ;
-		i = 1;
-		while(i <= dy)
-		{
-			y += cy ;
-			somme += dx;
-			if (somme >= dy)
-			{
-				somme -= dy;
-				x += cx;
-			}
-//			if((x < 1000 && x > 0) && (y < 1000 && y > 0))
-				put_cub(x, y, lst);
-			i++;
-		}
+		if ((l->x < 2000 && l->x > 0) && (l->y < 1200 && l->y > 0))
+			put_cub(l->x, l->y, lst);
+		l->i++;
 	}
 }
 
+void		negatif(t_li *l, t_tri *lst)
+{
+	l->somme = l->dy / 2;
+	l->i = 1;
+	while (l->i <= l->dy)
+	{
+		l->y += l->cy;
+		l->somme += l->dx;
+		if (l->somme >= l->dy)
+		{
+			l->somme -= l->dy;
+			l->x += l->cx;
+		}
+		if ((l->x < 2000 && l->x > 0) && (l->y < 1200 && l->y > 0))
+			put_cub(l->x, l->y, lst);
+		l->i++;
+	}
+}
+
+void		print_ligne(t_tri *lst)
+{
+	t_li	l;
+
+	l.x = lst->xp;
+	l.y = lst->yp;
+	l.dx = lst->xs - lst->xp;
+	l.dy = lst->ys - lst->yp;
+	l.cx = (l.dx > 0) ? 1 : -1;
+	l.cy = (l.dy > 0) ? 1 : -1;
+	l.dx = ft_abs(l.dx);
+	l.dy = ft_abs(l.dy);
+	if (l.dx > l.dy)
+		positif(&l, lst);
+	else
+		negatif(&l, lst);
+}
