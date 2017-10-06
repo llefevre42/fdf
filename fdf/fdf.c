@@ -6,7 +6,7 @@
 /*   By: llefevre <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/20 20:03:11 by llefevre          #+#    #+#             */
-/*   Updated: 2017/08/29 15:54:11 by llefevre         ###   ########.fr       */
+/*   Updated: 2017/10/06 23:42:01 by llefevre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,25 +36,25 @@ char	*ft_read(char *av)
 {
 	int		fd;
 	ssize_t	bsiz;
-	char	buf[BUFSIZE];
+	char	*lol;
 	char	*out;
 
-	if ((strcmp(av, "Makefile") == 0) || (strcmp(av, "random") == 0))
+	if ((strcmp(av, "Makefile") == 0) || (strcmp(av, "/dev/random") == 0))
 		ft_error(0);
 	fd = open(av, O_RDONLY);
-	out = NULL;
 	if (fd == -1)
 		return (NULL);
-	while ((bsiz = read(fd, &buf, BUFSIZE)) > 0)
-		out = ft_malloncat(out, buf, (size_t)bsiz);
-	return (out);
+	while (get_next_line(fd, &out) > 0)
+		ft_is_valid(out);
+	get_next_line(-42, &lol);
+	return (lol);
 }
 
 void	ft_error(int i)
 {
 	if (i == 0)
 	{
-		printf("error\n");
+		ft_putstr("error\n");
 		exit(1);
 	}
 }
@@ -93,6 +93,7 @@ int		main(int ac, char **av)
 	int		trash1;
 	int		trash2;
 	int		trash3;
+	char	*line;
 
 	lst.rotaz = 0;
 	lst.rotay = 0;
@@ -109,6 +110,7 @@ int		main(int ac, char **av)
 	}
 	else
 		ft_error(0);
+	ft_is_valid(lst.input);
 	norme_main(&lst, &trash1, &trash2, &trash3);
 	return (0);
 }

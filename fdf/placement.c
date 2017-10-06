@@ -6,7 +6,7 @@
 /*   By: llefevre <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/02 21:59:28 by llefevre          #+#    #+#             */
-/*   Updated: 2017/08/29 16:02:20 by llefevre         ###   ########.fr       */
+/*   Updated: 2017/10/06 23:34:11 by llefevre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	couleur_et_ligne(t_pla *s, t_tri *l)
 	if ((s->space > 0 && s->space < 2000) && (s->colone > 0 \
 			&& s->colone < 1200))
 		put_cub(s->space, s->colone, l);
-	if(l->bra == 0)
+	if (l->bra == 0)
 		ligne_setup(s, l);
 	l->tab[s->p][0] = 1;
 }

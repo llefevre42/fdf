@@ -6,7 +6,7 @@
 /*   By: llefevre <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/21 19:16:02 by llefevre          #+#    #+#             */
-/*   Updated: 2017/08/29 14:42:18 by llefevre         ###   ########.fr       */
+/*   Updated: 2017/10/06 23:32:36 by llefevre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,7 @@ void	color(char *str, t_tri *l, t_strc *s)
 			}
 		}
 		while (s->c < s->i)
-		{
-			s->coloris[s->w] = str[s->c];
-			s->c++;
-			s->w++;
-		}
+			s->coloris[s->w++] = str[s->c++];
 		s->coloris[s->w] = '\0';
 		l->tab[s->jb][4] = ft_htoi(s->coloris);
 		ft_strclr(s->coloris);

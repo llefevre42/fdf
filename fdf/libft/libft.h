@@ -6,7 +6,7 @@
 /*   By: llefevre <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/11 15:26:05 by llefevre          #+#    #+#             */
-/*   Updated: 2017/07/12 16:59:05 by llefevre         ###   ########.fr       */
+/*   Updated: 2017/10/07 00:14:56 by llefevre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ struct	s_list
 };
 typedef struct s_list	t_list;
 
+int		get_next_line(int fd, char **line);
 void	*ft_memset(void *b, int c, size_t len);
 void	ft_bzero(void *s, size_t n);
 void	*ft_memcpy(void *dst, const void *src, size_t n);

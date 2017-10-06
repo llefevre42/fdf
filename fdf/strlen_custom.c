@@ -6,7 +6,7 @@
 /*   By: llefevre <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/02 21:54:56 by llefevre          #+#    #+#             */
-/*   Updated: 2017/08/29 11:38:39 by llefevre         ###   ########.fr       */
+/*   Updated: 2017/10/06 23:42:31 by llefevre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,7 @@ void	while_strlen(char *str, t_tri *lst, t_str *s)
 	}
 	s->w++;
 	if (s->j != s->k && s->w > 1)
-	{
 		ft_error(0);
-	}
 	s->k = s->j;
 	s->j = 0;
 	if (str[s->i] == '\n')

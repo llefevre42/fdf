@@ -1,38 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_mallobufcat.c                                   :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: llefevre <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/15 11:06:17 by llefevre          #+#    #+#             */
-/*   Updated: 2017/10/06 22:20:45 by llefevre         ###   ########.fr       */
+/*   Created: 2017/05/12 16:12:22 by llefevre          #+#    #+#             */
+/*   Updated: 2017/10/06 23:57:48 by llefevre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
+# define BUFF_SIZE 5000000
+# include "libft.h"
+# include <unistd.h>
+# include <stdlib.h>
 
-char	*ft_malloncat(char *in, char *buf, size_t n)
+struct	s_gnl
 {
-	size_t	i;
-	ssize_t	j;
-	size_t	k;
-	char	*out;
+	char			*str;
+	int				itm;
+	int				fd;
+	int				read;
+	struct s_gnl	*next;
+};
+typedef struct s_gnl	t_gnl;
 
-	j = -1;
-	k = 0;
-	i = (in ? ft_strlen(in) : 0);
-	if (!(out = (char*)ft_memalloc(sizeof(char) * (i + n + 1))))
-		return (0);
-	while (in && in[++j])
-		out[j] = in[j];
-	while (n-- > 0)
-		out[j++] = buf[k++];
-	out[j] = '\0';
-	if (in)
-	{
-		ft_strclr(in);
-		ft_strdel(&in);
-	}
-	return (out);
-}
+#endif

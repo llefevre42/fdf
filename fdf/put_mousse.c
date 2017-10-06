@@ -6,7 +6,7 @@
 /*   By: llefevre <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/02 21:50:43 by llefevre          #+#    #+#             */
-/*   Updated: 2017/07/13 19:00:45 by llefevre         ###   ########.fr       */
+/*   Updated: 2017/10/06 23:42:43 by llefevre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ int		put_mousse(int keycode, int x, int y, void *param)
 
 	key = 0;
 	lst = ((t_tri *)param);
-	printf("mousse %d (%d:%d)\n", keycode, x, y);
 	if ((x >= 225 && x <= 475) && (y >= 505 && y <= 605))
 		lst->color = 0X3A8EBA;
 	if ((x >= 20 && x <= 245) && (y >= 505 && y <= 605))

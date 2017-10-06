@@ -1,38 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_mallobufcat.c                                   :+:      :+:    :+:   */
+/*   strlen_join_de_fdp.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: llefevre <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/15 11:06:17 by llefevre          #+#    #+#             */
-/*   Updated: 2017/10/06 22:20:45 by llefevre         ###   ########.fr       */
+/*   Created: 2017/10/06 22:41:51 by llefevre          #+#    #+#             */
+/*   Updated: 2017/10/06 22:43:26 by llefevre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "fdf.h"
 
-char	*ft_malloncat(char *in, char *buf, size_t n)
+char	*ft_strjoin_fdp(char const *s1, char const *s2)
 {
-	size_t	i;
-	ssize_t	j;
-	size_t	k;
-	char	*out;
+	int		i;
+	int		l;
+	char	*f;
 
-	j = -1;
-	k = 0;
-	i = (in ? ft_strlen(in) : 0);
-	if (!(out = (char*)ft_memalloc(sizeof(char) * (i + n + 1))))
+	i = 0;
+	if (!(s1 && s2))
 		return (0);
-	while (in && in[++j])
-		out[j] = in[j];
-	while (n-- > 0)
-		out[j++] = buf[k++];
-	out[j] = '\0';
-	if (in)
-	{
-		ft_strclr(in);
-		ft_strdel(&in);
-	}
-	return (out);
+	l = ft_strlen((char *)s1) + ft_strlen((char *)s2);
+	if (!(f = malloc((l + 2) * sizeof(char*))))
+		return (NULL);
+	l = 0;
+	while (s1[i] != '\0')
+		f[l++] = s1[i++];
+	i = 0;
+	while (s2[i] != '\0')
+		f[l++] = s2[i++];
+	f[l] = '\n';
+	l++;
+	f[l] = '\0';
+	return (f);
 }
