@@ -7,11 +7,13 @@ Premier projet de la branche graphique qui introduit les libraires graphiques et
 
 ![](france.png)
 
-Bases du projet : Afficher un rendu en semi 3d d'un fichier donner sous forme de caractères numérique.
+## Bases du projet : 
+Afficher un rendu en semi 3d d'un fichier donner sous forme de caractères numérique.
 
 ![](42.png)
 
-Option bonus : Interface utlisateur, lecture de code hexadecimal present dans le fichier source, 
+## Option bonus :
+Interface utlisateur, lecture de code hexadecimal present dans le fichier source, 
 taille de la map reglable, changement de couleur, reset, profondeur reglable, rotation de la map.
 
 ![](mimiqui.png)
